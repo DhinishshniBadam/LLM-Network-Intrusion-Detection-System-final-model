@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Intrusion Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🛡 AI Intrusion Detection System</h1>
+    <p class="subtitle">Adaptive Machine Learning Security Monitor</p>
+
+    <div class="card">
+
+        <h2>Enter Network Traffic Data</h2>
+
+        <textarea id="inputData" placeholder="Enter JSON data here..."></textarea>
+
+        <button onclick="predict()">Analyze Traffic</button>
+
+        <div id="resultBox" class="hidden">
+            <h3>Detection Result</h3>
+            <p id="result"></p>
+        </div>
+
+    </div>
+
+    <footer>
+        Intelligent IDS Dashboard • Final Year Project
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
