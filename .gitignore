@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pkl
+*.keras
+*.pyc
+.env
+notebooks/
+.cache/
+*.log

@@ -1,39 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Intrusion Detection System</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="container">
+<div class="layout">
 
-    <h1>🛡 AI Intrusion Detection System</h1>
-    <p class="subtitle">Adaptive Machine Learning Security Monitor</p>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">⬡</span>
+            <span class="logo-text">NIDS<span class="logo-accent">AI</span></span>
+        </div>
+        <nav>
+            <a class="nav-item active" href="#">
+                <span class="nav-icon">⬡</span> Dashboard
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-icon">◈</span> Traffic Analysis
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-icon">◉</span> Threat Log
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-icon">◎</span> Settings
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="status-dot active"></div>
+            <span>System Online</span>
+        </div>
+    </aside>
 
-    <div class="card">
+    <!-- Main Content -->
+    <main class="main">
 
-        <h2>Enter Network Traffic Data</h2>
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div>
+                <h1 class="page-title">Threat Detection</h1>
+                <p class="page-sub">Deep Learning Network Intrusion Detection</p>
+            </div>
+            <div class="topbar-right">
+                <div class="badge">
+                    <span class="pulse"></span> Live Monitor
+                </div>
+            </div>
+        </header>
 
-        <textarea id="inputData" placeholder="Enter JSON data here..."></textarea>
-
-        <button onclick="predict()">Analyze Traffic</button>
-
-        <div id="resultBox" class="hidden">
-            <h3>Detection Result</h3>
-            <p id="result"></p>
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <p class="stat-label">Model</p>
+                <p class="stat-value">Neural Net</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Features</p>
+                <p class="stat-value">41</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Classes</p>
+                <p class="stat-value">Normal / Anomaly</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">API Status</p>
+                <p class="stat-value" id="apiStatus">Checking...</p>
+            </div>
         </div>
 
-    </div>
+        <!-- Input + Result -->
+        <div class="content-grid">
 
-    <footer>
-        Intelligent IDS Dashboard • Final Year Project
-    </footer>
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">Network Traffic Input</span>
+                    <button class="btn-ghost" onclick="loadSample()">Load Sample</button>
+                </div>
+                <textarea id="inputData" spellcheck="false" placeholder='{"duration": 0, "protocol_type": "tcp", ...}'></textarea>
+                <button class="btn-primary" onclick="predict()" id="analyzeBtn">
+                    <span id="btnText">Analyze Traffic</span>
+                </button>
+            </div>
 
+            <div class="panel" id="resultPanel">
+                <div class="panel-header">
+                    <span class="panel-title">Detection Result</span>
+                </div>
+
+                <div id="placeholder" class="placeholder-state">
+                    <div class="placeholder-icon">◎</div>
+                    <p>Submit traffic data to see results</p>
+                </div>
+
+                <div id="resultContent" class="hidden">
+                    <div class="alert-banner" id="alertBanner">
+                        <span id="alertText"></span>
+                    </div>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <p class="result-label">Prediction</p>
+                            <p class="result-value" id="resPrediction"></p>
+                        </div>
+                        <div class="result-item">
+                            <p class="result-label">Confidence</p>
+                            <p class="result-value" id="resConfidence"></p>
+                        </div>
+                        <div class="result-item full-width">
+                            <p class="result-label">Risk Score</p>
+                            <div class="risk-bar-wrap">
+                                <div class="risk-bar-track">
+                                    <div class="risk-bar-fill" id="riskBar"></div>
+                                </div>
+                                <span id="resRisk"></span>
+                            </div>
+                        </div>
+                        <div class="result-item full-width hidden" id="resExtra"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="panel" style="margin-top:24px;">
+            <div class="panel-header">
+                <span class="panel-title">Recent Analyses</span>
+                <button class="btn-ghost" onclick="clearHistory()">Clear</button>
+            </div>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Time</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                        <th>Risk Score</th>
+                        <th>Alert</th>
+                        <th>Attack Type</th>
+                    </tr>
+                </thead>
+                <tbody id="historyBody">
+                    <tr><td colspan="6" class="empty-row">No analyses yet</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
